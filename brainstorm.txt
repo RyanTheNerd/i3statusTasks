@@ -1,0 +1,55 @@
+There will be 3 python modules:
+    1 responsible for creating and reading from daily task files
+    1 for inserting code into i3status
+    1 for adding new tasks to the master task file
+
+Instead of merely measuring tasks by the amount of time you do them, you should be able to use any arbitrary measurement, like reps, minutes, lines, pushups, situps
+You should be able to have multiple arbitrary goals, and have them increase / decrease based on how many times you've completed the task.
+If a task is not completed, it should roll back by the same margin it increased last time, and stay there for the number of times you failed at the next step
+
+task
+    goals
+        goal
+        goal
+        goal
+    
+    activeDays
+        monday
+        wednesday
+        friday
+
+    percentComplete:
+        completedGoals = 0
+        for goal in goals:
+            if(goal.isComplete)
+                completedGoals += 1
+        return completedGoals / goals.len
+
+            
+goal
+    delta
+    failedTimes
+    timesTillIncrement
+
+    // if goal is complete, increase goal and set timesTillIncrement to 1
+    // else if goal failed, decrease goal and set failedInARow +1
+    // only set timesTillIncrement and failedInARow to 0 if goal is completed
+    // if goal is incomplete, set timesTillIncrement to failedInARow
+    adjustGoal:
+        if goal.complete == false:
+            goal.count -= goal.delta
+            failedInARow += 1
+            timesTillIncrement += 1
+
+        else:
+            if(goal.failedInARow == 0) {
+                goal.count += goal.delta
+            }
+            else
+                goal.timesTillIncrement = goal.failedInARow
+                goal.failedInARow = 0
+
+
+
+if(task.complete == false)
+    task.goals["]
